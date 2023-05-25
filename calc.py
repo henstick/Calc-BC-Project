@@ -1,7 +1,8 @@
-from sympy import symbols, diff, solve
+from sympy import symbols, diff, solve, sympify
 
 # Get the function and variable from the user
-function = input("Enter the function: ")
+function = sympify(input("Enter the function: "))
+
 variable = input("Enter the variable to optimize with respect to: ")
 
 # Define the symbol
