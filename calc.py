@@ -1,5 +1,7 @@
+import sympy
 from sympy import symbols, diff, solve, sympify
-from sympy.plotting import plot
+import matplotlib.pyplot as plt
+import numpy as np
 
 # Get the function and variable from the user
 function = sympify(input("Enter the function: "))
@@ -29,13 +31,29 @@ print("Function Values at Critical Points:", values)
 print("Maximum Value:", maximum)
 print("Minimum Value:", minimum)
 
-
 # Specify the range for the plot (e.g., -10 to 10 for x-axis, -5 to 5 for y-axis)
-x_range = (-5, 5)
-y_range = (-4, 4)
+x_range = np.linspace(-5, 5, 400)
+
+# Create a function for numpy from the sympy expression
+f_lambdified = sympy.lambdify(x, function, "numpy")
 
 # Create the plot
-p1 = plot(function, (x, *x_range), ylim=y_range, show=False)
-p1.show()
+plt.figure(figsize=(8, 6))
+plt.plot(x_range, f_lambdified(x_range), label=str(function))
+
+# Plot the critical points
+for point in critical_points:
+    plt.plot(point, function.subs(x, point), 'ro')
+
+plt.xlim([-5, 5])
+plt.ylim([-3, 3])
+plt.xlabel(variable)
+plt.ylabel('f(' + variable + ')')
+plt.title('Function and its Critical Points')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
 
 #2*x**2 + 3*x**3
