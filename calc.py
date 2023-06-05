@@ -1,4 +1,5 @@
 from sympy import symbols, diff, solve, sympify
+from sympy.plotting import plot
 
 # Get the function and variable from the user
 function = sympify(input("Enter the function: "))
@@ -27,3 +28,14 @@ print("Critical Points:", critical_points)
 print("Function Values at Critical Points:", values)
 print("Maximum Value:", maximum)
 print("Minimum Value:", minimum)
+
+
+# Specify the range for the plot (e.g., -10 to 10 for x-axis, -5 to 5 for y-axis)
+x_range = (-5, 5)
+y_range = (-4, 4)
+
+# Create the plot
+p1 = plot(function, (x, *x_range), ylim=y_range, show=False)
+p1.show()
+
+#2*x**2 + 3*x**3
